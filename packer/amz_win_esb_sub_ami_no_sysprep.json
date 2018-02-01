@@ -39,6 +39,19 @@
   }],
   "provisioners": [
     {
+      "type": "windows-restart"
+    },
+    {
+      "type": "powershell",
+      "script": "scripts/win2016/download_cookbooks.ps1",
+      "environment_vars": [
+        "SOURCE_BUCKET={{user `source_bucket`}}",
+        "CB_BUILD_NO={{user `cb_buld_no`}}",
+        "BUCKET_REGION={{user `bucket_region`}}",
+        "CHEF_PATH={{user `chef_path`}}"
+      ]
+    },
+    {
       "type": "chef-client",
       "guest_os_type": "windows",
       "config_template": "packer/templates/chef-client-win.tpl",
